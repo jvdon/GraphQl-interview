@@ -1,0 +1,57 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Contract {
+    id:ID!
+    description:String!
+    user_id:Int!
+    created_at:String!
+    fidelity:Int!
+    amount:Float!
+}
+
+type ContractResult {
+    success: Boolean!
+    errors: [String]
+    contract: Contract
+}
+
+type Query {
+    contracts: ContractResult!
+    contract(contractId: ID!): ContractResult!
+    users: UserResult!
+    user(userId: ID!): UserResult!
+}
+
+type DeleteContractResult {
+    success: Boolean!
+    errors: [String]
+}
+
+type Mutation {
+    createContract(description:String!,user_id:Int!,created_at:String!,fidelity:Int!,amount:Float!): ContractResult!
+    deleteContract(contractId: ID!): DeleteContractResult!
+    createUser(name:String!, email:String!): UserResult!
+    deleteUser(todoId: ID!): DeleteUserResult!
+}
+
+# Users
+
+type User {
+    id:ID!
+    name:String!
+    email:Int!
+}
+
+type UserResult {
+    success: Boolean!
+    errors: [String]
+    user: User
+}
+
+type DeleteUserResult {
+    success: Boolean!
+    errors: [String]
+}
